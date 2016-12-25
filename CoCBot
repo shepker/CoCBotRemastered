@@ -1,4 +1,4 @@
-alert("Please zoom out screen completely before running! This allows the bot to run correctly.")
+alert("Please zoom out screen completely before running! This allows the bot to run correctly. Also, if your army camps contain anything besides Barch please empty them before starting.")
 
 usleep(1500000)
 
@@ -12,8 +12,10 @@ var4 = {type=CONTROLLER_TYPE.SWITCH, title="Train Troops (Will only use Army Pre
 
 var5 = {type=CONTROLLER_TYPE.SWITCH, title="Attack (Only attacks Barch!)", key="", value="1"}
 
+var6 = {type=CONTROLLER_TYPE.SWITCH, title=" (Only donates Archers!)", key="", value="1"}
 
-dialogCtrls = {var1, var2, var3, var4, var5}
+dialogCtrls = {var1, var2, var3, var4, var5, var6}
+
 
 dialog(dialogCtrls, false)
 
@@ -119,6 +121,71 @@ results = findColors({{11909747,0,0}, {14080949,24,12}, {14081981,29,-13}, {1408
 	end
 
 end
+
+--Donates Archers
+
+
+if var6.value == 1 then
+
+	tap(740, 40)
+	usleep(1000000)
+
+repeat
+
+	ThrowArrow = 16777215
+
+	TimeColor = 9211524
+
+	PlainColor = 4343106
+	
+	results = findImage("CoCBotImages/Donate.bmp", 8, 0.5, nil, {191, 0, 384, 735})
+	
+		if results ~= nil then
+
+			for i, a in pairs(results) do
+
+				tap(a[1], a[2])
+
+		usleep(1000000)
+
+			end
+
+		end
+
+			for i=1, 8 do
+
+				results = findImage("CoCBotImages/Archers.bmp", 8, 0.5, nil, {9, 839, 1521, 1148})
+
+					if results ~= nil then
+
+						for i, a in pairs(results) do
+
+							tap(a[1], a[2])
+
+					usleep(1000000)
+						
+						end
+
+					end
+
+			end
+
+	if getColor(1294, 700) == ThrowArrow or getColor(1294, 700) == TimeColor then
+
+	usleep(1000000)
+
+	tap(1294, 700)
+
+	usleep(1000000)
+
+	end
+
+until getColor(1294, 700) == PlainColor
+
+tap(752, 792)
+
+end
+
 
 
 --Trains troops
