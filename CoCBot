@@ -30,7 +30,7 @@ if var4.value == 1 then
 	tap(1330, 690)
 	usleep(1000000)
 
-	for i=1, 270 do
+	for i=1, 480 do
 
 		tap(1160, 1965)
 		usleep(10000)
